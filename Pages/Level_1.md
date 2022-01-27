@@ -532,6 +532,7 @@ void loop()
 
 ## Circuit Diagrams
 
+<iframe src="https://drive.google.com/file/d/1kyB57-gy38jwMJYV64Le3A7HMszeaK0M/preview" width="640" height="480" allow="autoplay"></iframe>
 
 ## Code
 
@@ -539,19 +540,20 @@ void loop()
 
 void setup() {
   pinMode(A0,INPUT);
+  Serial.begin(9600);
 }
 
 void loop() {
   int value=analogRead(A0);
   Serial.println(value);
+  delay(1000);
 }
 
 ```
 
 ## Output
 
-
-
+<iframe src="https://drive.google.com/file/d/1kvbY5FXLrZJDjJPoV1iAetbvJJHrYI1P/preview" width="640" height="480" allow="autoplay"></iframe>
 
 # Experiment 12 : 7 Segment Display
         
@@ -568,18 +570,441 @@ void loop() {
 
 ## Circuit Diagrams
 
-
+<iframe src="https://drive.google.com/file/d/1l7lTHtJwW6tuEQGShJlKGWVZCq8XbVZL/preview" width="640" height="480" allow="autoplay"></iframe>
 
 ## Code
 
 ```
-
+int a=7;// set digital pin 7 for segment a
+int b=6;// set digital pin 6 for segment b
+int c=5;// set digital pin 5 for segment c
+int d=10;// set digital pin 10 for segment d
+int e=11;// set digital pin 11 for segment e
+int f=8;// set digital pin 8 for segment f
+int g=9;// set digital pin 9 for segment g
+int dp=4;// set digital pin 4 for segment dp
+void digital_0(void) // display number 
+{
+unsigned char j;
+digitalWrite(a,HIGH);
+digitalWrite(b,HIGH);
+digitalWrite(c,HIGH);
+digitalWrite(d,HIGH);
+digitalWrite(e,HIGH);
+digitalWrite(f,HIGH);
+digitalWrite(g,LOW);
+digitalWrite(dp,LOW);
+}
+void digital_1(void) // display number 1
+{
+unsigned char j;
+digitalWrite(c,HIGH);// set level as “high” for pin 5, turn on segment c
+digitalWrite(b,HIGH);// turn on segment b
+for(j=7;j<=11;j++)// turn off other segments
+digitalWrite(j,LOW);
+digitalWrite(dp,LOW);// turn off segment dp
+}
+void digital_2(void) // display number 2
+{
+unsigned char j;
+digitalWrite(b,HIGH);
+digitalWrite(a,HIGH);
+for(j=9;j<=11;j++)
+digitalWrite(j,HIGH);
+digitalWrite(dp,LOW);
+digitalWrite(c,LOW);
+digitalWrite(f,LOW);
+}
+void digital_3(void) // display number 3
+{digitalWrite(g,HIGH);
+digitalWrite(a,HIGH);
+digitalWrite(b,HIGH);
+digitalWrite(c,HIGH);
+digitalWrite(d,HIGH);
+digitalWrite(dp,LOW);
+digitalWrite(f,LOW);
+digitalWrite(e,LOW);
+}
+void digital_4(void) // display number 4
+{digitalWrite(c,HIGH);
+digitalWrite(b,HIGH);
+digitalWrite(f,HIGH);
+digitalWrite(g,HIGH);
+digitalWrite(dp,LOW);
+digitalWrite(a,LOW);
+digitalWrite(e,LOW);
+digitalWrite(d,LOW);
+}
+void digital_5(void) // display number 5
+{
+unsigned char j;
+digitalWrite(a,HIGH);
+digitalWrite(b, LOW);
+digitalWrite(c,HIGH);
+digitalWrite(d,HIGH);
+digitalWrite(e, LOW);
+digitalWrite(f,HIGH);
+digitalWrite(g,HIGH);
+digitalWrite(dp,LOW);
+}
+void digital_6(void) // display number 6
+{
+unsigned char j;
+for(j=7;j<=11;j++)
+digitalWrite(j,HIGH);
+digitalWrite(c,HIGH);
+digitalWrite(dp,LOW);
+digitalWrite(b,LOW);
+}
+void digital_7(void) // display number 7
+{
+unsigned char j;
+for(j=5;j<=7;j++)
+digitalWrite(j,HIGH);
+digitalWrite(dp,LOW);
+for(j=8;j<=11;j++)
+digitalWrite(j,LOW);
+}
+void digital_8(void) // display number 8
+{
+unsigned char j;
+for(j=5;j<=11;j++)
+digitalWrite(j,HIGH);
+digitalWrite(dp,LOW);
+}
+void digital_9(void) // display number 9
+{
+unsigned char j;
+digitalWrite(a,HIGH);
+digitalWrite(b,HIGH);
+digitalWrite(c,HIGH);
+digitalWrite(d,HIGH);
+digitalWrite(e, LOW);
+digitalWrite(f,HIGH);
+digitalWrite(g,HIGH);
+digitalWrite(dp,LOW);
+}
+void setup()
+{
+int i;// set variable
+for(i=4;i<=11;i++)
+pinMode(i,OUTPUT);// set pin 4-11as “output”
+}
+void loop()
+{
+while(1)
+{
+digital_0();// display number 0
+delay(1000);// wait for 1s
+digital_1();// display number 1
+delay(1000);// wait for 1s
+digital_2();// display number 2
+delay(1000); // wait for 1s
+digital_3();// display number 3
+delay(1000); // wait for 1s
+digital_4();// display number 4
+delay(1000); // wait for 1s
+digital_5();// display number 5
+delay(1000); // wait for 1s
+digital_6();// display number 6
+delay(1000); // wait for 1s
+digital_7();// display number 7
+delay(1000); // wait for 1s
+digital_8();// display number 8
+delay(1000); // wait for 1s
+digital_9();// display number 9
+delay(1000); // wait for 1s
+}}
 
 
 ```
 
 ## Output
 
+<iframe src="https://drive.google.com/file/d/1l13DCYrQZ1uhAb0sOxh2xnbH38Xu9Z1j/preview" width="640" height="480" allow="autoplay"></iframe>
+
+# Assigenments
+
+## Assigenment  1- Night lighting system 
 
 
+> An experiment to prototype a night ligting system.
 
+### Components
+* Arduino Uno
+* Breadboard
+* RED,GREEN LED
+* Jumper wire
+* Restsor 220 ohm 10 k
+* LDR Sensor
+
+### Circuit
+
+<iframe src="https://drive.google.com/file/d/1lUYA0-UbfrYyGOoQif-xRGF1wISazxC5/preview" width="640" height="480" allow="autoplay"></iframe>
+
+### Video
+
+<iframe src="https://drive.google.com/file/d/1l_4iXTNj2CNAefJXnJpuU4RRh-MPKdhY/preview" width="640" height="480" allow="autoplay"></iframe>
+
+### Code
+```
+
+#define LDR A0
+#define LED 12
+
+void setup() {
+  pinMode(LDR,INPUT);
+  Serial.begin(115200);
+}
+
+void loop() {
+  int value=analogRead(LDR);
+  Serial.println(value);
+  delay(1000);
+  if(value>800){
+    digitalWrite(LED,HIGH);
+    delay(1000);
+    }
+  else{
+    digitalWrite(LED,LOW);
+    delay(1000);
+    }  
+}
+
+
+```
+
+## Assigenment 2 - 6 Number Random Dice
+
+
+> For a dice random numbers from 1-6 is required but I took numbers from 0-9.
+
+### Components
+* Arduino Uno
+* Breadboard
+* pushbuttion
+* Jumper wire
+* Restsor 220 ohm
+* push buttion
+
+### Circuit
+
+<iframe src="https://drive.google.com/file/d/1lUJ8w3sh6rKqiSFNrE_08SyQyH88l8k_/preview" width="640" height="480" allow="autoplay"></iframe>
+
+### Video
+
+<iframe src="https://drive.google.com/file/d/1lSfDRG9heKJsdru7ROcSp8j8h9r82MO9/preview" width="640" height="480" allow="autoplay"></iframe>
+
+### Code
+```
+
+//for a dice numbers 1-6 is enough but I took from numbers 0-9.
+int readPin = 4;
+bool buttonState = 0;
+int time = 500;        //can set the time to t=0 sec,but not working efficiently.
+int sevenSeg[] = {13, 12, 11, 10, 9, 8, 7, 6};   
+/*
+a=7
+b=6
+c=11
+d=12
+e=13
+f=8
+g=9
+*/
+
+//display number 0
+void digital_0() {
+  digitalWrite(sevenSeg[0], HIGH);
+  digitalWrite(sevenSeg[1], HIGH);
+  digitalWrite(sevenSeg[2], HIGH);
+  digitalWrite(sevenSeg[3], LOW);
+  digitalWrite(sevenSeg[4], LOW);
+  digitalWrite(sevenSeg[5], HIGH);
+  digitalWrite(sevenSeg[6], HIGH);
+  digitalWrite(sevenSeg[7], HIGH);
+}
+
+//display number 1
+void digital_1() {
+  digitalWrite(sevenSeg[0], LOW);
+  digitalWrite(sevenSeg[1], HIGH);
+  digitalWrite(sevenSeg[2], HIGH);
+  digitalWrite(sevenSeg[3], LOW);
+  digitalWrite(sevenSeg[4], LOW);
+  digitalWrite(sevenSeg[5], LOW);
+  digitalWrite(sevenSeg[6], LOW);
+  digitalWrite(sevenSeg[7], LOW);
+}
+
+//display number 2
+void digital_2() {
+  digitalWrite(sevenSeg[0], HIGH);
+  digitalWrite(sevenSeg[1], HIGH);
+  digitalWrite(sevenSeg[2], LOW);
+  digitalWrite(sevenSeg[3], LOW);
+  digitalWrite(sevenSeg[4], HIGH);
+  digitalWrite(sevenSeg[5], LOW);
+  digitalWrite(sevenSeg[6], HIGH);
+  digitalWrite(sevenSeg[7], HIGH);
+}
+
+//display number 3
+void digital_3() {
+  digitalWrite(sevenSeg[0], LOW);
+  digitalWrite(sevenSeg[1], HIGH);
+  digitalWrite(sevenSeg[2], HIGH);
+  digitalWrite(sevenSeg[3], LOW);
+  digitalWrite(sevenSeg[4], HIGH);
+  digitalWrite(sevenSeg[5], LOW);
+  digitalWrite(sevenSeg[6], HIGH);
+  digitalWrite(sevenSeg[7], HIGH);
+}
+
+
+//display number 4
+void digital_4() {
+  digitalWrite(sevenSeg[0], LOW);
+  digitalWrite(sevenSeg[1], LOW);
+  digitalWrite(sevenSeg[2], HIGH);
+  digitalWrite(sevenSeg[3], LOW);
+  digitalWrite(sevenSeg[4], HIGH);
+  digitalWrite(sevenSeg[5], HIGH);
+  digitalWrite(sevenSeg[6], LOW);
+  digitalWrite(sevenSeg[7], HIGH);
+}
+
+
+//display number 5
+void digital_5() {
+  digitalWrite(sevenSeg[0], LOW);
+  digitalWrite(sevenSeg[1], HIGH);
+  digitalWrite(sevenSeg[2], HIGH);
+  digitalWrite(sevenSeg[3], LOW);
+  digitalWrite(sevenSeg[4], HIGH);
+  digitalWrite(sevenSeg[5], HIGH);
+  digitalWrite(sevenSeg[6], HIGH);
+  digitalWrite(sevenSeg[7], LOW);
+}
+
+
+//display number 6
+void digital_6() {
+  digitalWrite(sevenSeg[0], HIGH);
+  digitalWrite(sevenSeg[1], HIGH);
+  digitalWrite(sevenSeg[2], HIGH);
+  digitalWrite(sevenSeg[3], LOW);
+  digitalWrite(sevenSeg[4], LOW);
+  digitalWrite(sevenSeg[5], HIGH);
+  digitalWrite(sevenSeg[6], HIGH);
+  digitalWrite(sevenSeg[7], LOW);
+}
+
+
+//display number 7
+void digital_7() {
+  digitalWrite(sevenSeg[0], LOW);
+  digitalWrite(sevenSeg[1], LOW);
+  digitalWrite(sevenSeg[2], HIGH);
+  digitalWrite(sevenSeg[3], LOW);
+  digitalWrite(sevenSeg[4], LOW);
+  digitalWrite(sevenSeg[5], LOW);
+  digitalWrite(sevenSeg[6], HIGH);
+  digitalWrite(sevenSeg[7], HIGH);
+}
+
+
+//display number 8
+void digital_8() {
+  digitalWrite(sevenSeg[0], HIGH);
+  digitalWrite(sevenSeg[1], HIGH);
+  digitalWrite(sevenSeg[2], HIGH);
+  digitalWrite(sevenSeg[3], HIGH);
+  digitalWrite(sevenSeg[4], HIGH);
+  digitalWrite(sevenSeg[5], HIGH);
+  digitalWrite(sevenSeg[6], HIGH);
+  digitalWrite(sevenSeg[7], HIGH);
+}
+
+
+//display number 9
+void digital_9() {
+  digitalWrite(sevenSeg[0], LOW);
+  digitalWrite(sevenSeg[1], HIGH);
+  digitalWrite(sevenSeg[2], HIGH);
+  digitalWrite(sevenSeg[3], LOW);
+  digitalWrite(sevenSeg[4], HIGH);
+  digitalWrite(sevenSeg[5], LOW);
+  digitalWrite(sevenSeg[6], HIGH);
+  digitalWrite(sevenSeg[7], HIGH);
+}
+
+
+void setup() {
+  Serial.begin(9600);
+
+  for (int i = 0; i < 8; i++) {
+    pinMode(sevenSeg[i], OUTPUT);
+    digitalWrite(sevenSeg[i], HIGH);
+  }
+}
+
+void loop() {
+  buttonState = digitalRead(readPin);
+  if (buttonState == HIGH) {
+    int ran = random(0, 10);
+    if (ran == 0) {
+      digital_0();// display number 2
+      delay(time);// wait for 2s
+    }
+    if (ran == 1) {
+      digital_1();// display number 1
+      delay(time);// wait for 2s
+    }
+    if (ran == 2) {
+      digital_2();// display number 2
+      delay(time);// wait for 2s
+    }
+    if (ran == 3) {
+      digital_3();// display number 3
+      delay(time);// wait for 2s
+    }
+    if (ran == 4) {
+      digital_4();// display number 4
+      delay(time);// wait for 2s
+    }
+    if (ran == 5) {
+      digital_5();// display number 5
+      delay(time);// wait for 2s
+    }
+    if (ran == 6) {
+      digital_6();// display number 6
+      delay(time);// wait for 2s
+    }
+    if (ran == 7) {
+      digital_7();// display number 2
+      delay(time);// wait for 2s
+    }
+    if (ran == 8) {
+      digital_8();// display number 2
+      delay(time);// wait for 2s
+    }
+    if (ran == 9) {
+      digital_9();// display number 2
+      delay(time);// wait for 2s
+    }
+  }
+  /*else
+  {
+    digitalWrite(sevenSeg[0], LOW);
+    digitalWrite(sevenSeg[1], LOW);
+    digitalWrite(sevenSeg[2], LOW);
+    digitalWrite(sevenSeg[3], LOW);
+    digitalWrite(sevenSeg[4], LOW);
+    digitalWrite(sevenSeg[5], LOW);
+    digitalWrite(sevenSeg[6], LOW);
+    digitalWrite(sevenSeg[7], LOW);
+  }*/
+  
+}
+```
